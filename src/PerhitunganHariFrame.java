@@ -69,6 +69,11 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
 
         cmbBulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember", " " }));
         cmbBulan.setToolTipText("");
+        cmbBulan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBulanActionPerformed(evt);
+            }
+        });
 
         jSpinner1.setName(""); // NOI18N
         jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -274,6 +279,23 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
         jLabel8.setText("Selisih Hari : ");
         jLabel9.setText("Tahun Kabisat:"); 
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void cmbBulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBulanActionPerformed
+    int tahun = (int) jSpinner1.getValue();
+    int bulan = cmbBulan.getSelectedIndex() + 1; // Bulan dari JComboBox (1 untuk Januari, 12 untuk Desember)
+    
+    // Ambil hari saat ini dari calendarAwal
+    LocalDate currentLocalDate = calendarAwal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    int hari = Math.min(currentLocalDate.getDayOfMonth(), LocalDate.of(tahun, bulan, 1).lengthOfMonth());
+
+    // Buat tanggal baru dengan bulan dan tahun yang diperbarui
+    LocalDate updatedLocalDate = LocalDate.of(tahun, bulan, hari);
+    
+    // Set tanggal yang diperbarui ke kedua kalender
+    calendarAwal.setDate(java.util.Date.from(updatedLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    calendarAkhir.setDate(java.util.Date.from(updatedLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
+    }//GEN-LAST:event_cmbBulanActionPerformed
 
     /**
      * @param args the command line arguments
