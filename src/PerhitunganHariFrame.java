@@ -217,46 +217,35 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHitungHariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungHariActionPerformed
-        
-        // Mendapatkan bulan dan tahun dari JComboBox dan JSpinner
         int tahun = (int) jSpinner1.getValue();
-                if (String.valueOf(tahun).length() != 4) {
+        if (String.valueOf(tahun).length() != 4) {
             JOptionPane.showMessageDialog(this, "Tahun harus terdiri dari 4 digit", "Input Tidak Valid", JOptionPane.ERROR_MESSAGE);
             return; 
-                }
+        }
         int bulan = cmbBulan.getSelectedIndex() + 1;
 
-        // Membuat tanggal menggunakan LocalDate
         LocalDate date = LocalDate.of(tahun, bulan, 1);
         int daysInMonth = date.lengthOfMonth();
-        boolean isLeapYear = date.isLeapYear(); // Cek apakah tahun kabisat
+        boolean isLeapYear = date.isLeapYear();
 
-        // Menampilkan jumlah hari dan informasi tahun kabisat jika bulan adalah Februari
         String hasil = "Jumlah Hari : " + daysInMonth;
         if (bulan == 2 && isLeapYear) {
-            hasil += " (Tahun Kabisat)"; // Jika bulan Februari dan tahun kabisat
+            hasil += " (Tahun Kabisat)";
         }
 
-        // Menampilkan hari pertama dan terakhir dalam bulan tersebut
         LocalDate firstDay = date.withDayOfMonth(1);
         LocalDate lastDay = date.withDayOfMonth(daysInMonth);
         jLabel5.setText("Jumlah Hari : " + daysInMonth);
-
-        jLabel5.setText(hasil); // Mengatur teks jLabel5 sebagai hasil untuk jumlah hari dalam bulan
-
-        // Menambahkan informasi Tahun Kabisat
         jLabel9.setText("Tahun Kabisat: " + (isLeapYear ? "Ya" : "Tidak"));
 
-        // Menghitung selisih hari antara tanggal awal (hari pertama) dan tanggal akhir yang dipilih
-        LocalDate startDate = firstDay; // Tanggal awal adalah hari pertama bulan tersebut
+        LocalDate startDate = calendarAwal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate endDate = calendarAkhir.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
         long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-        jLabel8.setText("Selisih Hari : " + daysBetween); // Menampilkan selisih hari
+        jLabel8.setText("Selisih Hari : " + daysBetween);
 
-        // Menampilkan nama hari untuk tanggal yang dipilih
         jLabel6.setText("Hari Pertama: " + getNamaHariIndonesia(firstDay.getDayOfWeek()));
         jLabel7.setText("Hari Terakhir: " + getNamaHariIndonesia(lastDay.getDayOfWeek()));
+    
 
     
     }//GEN-LAST:event_btnHitungHariActionPerformed
