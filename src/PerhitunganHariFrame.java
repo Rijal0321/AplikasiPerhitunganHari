@@ -2,6 +2,7 @@
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import javax.swing.JOptionPane;
 
 public class PerhitunganHariFrame extends javax.swing.JFrame {
 
@@ -213,8 +214,13 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHitungHariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungHariActionPerformed
+        
         // Mendapatkan bulan dan tahun dari JComboBox dan JSpinner
         int tahun = (int) jSpinner1.getValue();
+                if (String.valueOf(tahun).length() != 4) {
+            JOptionPane.showMessageDialog(this, "Tahun harus terdiri dari 4 digit", "Input Tidak Valid", JOptionPane.ERROR_MESSAGE);
+            return; 
+                }
         int bulan = cmbBulan.getSelectedIndex() + 1;
 
         // Membuat tanggal menggunakan LocalDate
