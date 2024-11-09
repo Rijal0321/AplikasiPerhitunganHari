@@ -11,7 +11,28 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
     public PerhitunganHariFrame() {
         initComponents();
     }
-
+    
+    // Fungsi untuk mengubah nama hari ke dalam bahasa Indonesia
+    private String getNamaHariIndonesia(java.time.DayOfWeek dayOfWeek) {
+        switch (dayOfWeek) {
+            case MONDAY:
+                return "Senin";
+            case TUESDAY:
+                return "Selasa";
+            case WEDNESDAY:
+                return "Rabu";
+            case THURSDAY:
+                return "Kamis";
+            case FRIDAY:
+                return "Jumat";
+            case SATURDAY:
+                return "Sabtu";
+            case SUNDAY:
+                return "Minggu";
+            default:
+                return "";
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
