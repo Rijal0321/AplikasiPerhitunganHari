@@ -48,6 +48,11 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
         cmbBulan.setToolTipText("");
 
         jSpinner1.setName(""); // NOI18N
+        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner1StateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Pilih Bulan ");
 
@@ -192,6 +197,10 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
     jLabel6.setText("Selisih Hari: " + daysBetween); // Mengatur teks jLabel6 sebagai hasil selisih hari
 
     }//GEN-LAST:event_btnHitungHariActionPerformed
+
+    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
+         btnHitungHariActionPerformed(null); 
+    }//GEN-LAST:event_jSpinner1StateChanged
 
     /**
      * @param args the command line arguments
