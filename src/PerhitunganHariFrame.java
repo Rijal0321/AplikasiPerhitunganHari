@@ -57,6 +57,11 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
         jLabel4.setText("Pilih Tanggal Akhir");
 
         btnHitungHari.setText("Hitung Hari");
+        btnHitungHari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHitungHariActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Jumlah Hari :");
 
@@ -155,6 +160,37 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnHitungHariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungHariActionPerformed
+    // Mendapatkan bulan dan tahun dari JComboBox dan JSpinner
+    int tahun = (int) jSpinner1.getValue();
+    int bulan = cmbBulan.getSelectedIndex() + 1;
+
+    // Membuat tanggal menggunakan LocalDate
+    LocalDate date = LocalDate.of(tahun, bulan, 1);
+    int daysInMonth = date.lengthOfMonth();
+    boolean isLeapYear = date.isLeapYear();
+
+    // Menampilkan jumlah hari dan informasi tahun kabisat jika bulan adalah Februari
+    String hasil = "Jumlah Hari: " + daysInMonth;
+    if (bulan == 2 && isLeapYear) {
+        hasil += " (Tahun Kabisat)";
+    }
+
+    // Menampilkan hari pertama dan terakhir dalam bulan tersebut
+    LocalDate firstDay = date.withDayOfMonth(1);
+    LocalDate lastDay = date.withDayOfMonth(daysInMonth);
+    hasil += ", Hari Pertama: " + firstDay.getDayOfWeek() + ", Hari Terakhir: " + lastDay.getDayOfWeek();
+
+    jLabel5.setText(hasil); // Mengatur teks jLabel5 sebagai hasil untuk jumlah hari dalam bulan
+
+    // Menghitung selisih hari antara tanggal awal dan akhir
+    LocalDate startDate = calendarAwal.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    LocalDate endDate = calendarAkhir.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
+    jLabel6.setText("Selisih Hari: " + daysBetween); // Mengatur teks jLabel6 sebagai hasil selisih hari
+
+    }//GEN-LAST:event_btnHitungHariActionPerformed
 
     /**
      * @param args the command line arguments
