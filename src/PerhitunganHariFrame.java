@@ -252,8 +252,9 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
         jLabel8.setText("Selisih Hari : " + daysBetween); // Menampilkan selisih hari
 
         // Menampilkan nama hari untuk tanggal yang dipilih
-        jLabel6.setText("Hari Pertama: " + firstDay.getDayOfWeek());
-        jLabel7.setText("Hari Terakhir: " + lastDay.getDayOfWeek());
+        jLabel6.setText("Hari Pertama: " + getNamaHariIndonesia(firstDay.getDayOfWeek()));
+        jLabel7.setText("Hari Terakhir: " + getNamaHariIndonesia(lastDay.getDayOfWeek()));
+
     
     }//GEN-LAST:event_btnHitungHariActionPerformed
 
@@ -264,7 +265,7 @@ public class PerhitunganHariFrame extends javax.swing.JFrame {
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // Mengatur ulang semua komponen ke nilai default
         cmbBulan.setSelectedIndex(0);
-        jSpinner1.setValue(2024); 
+        jSpinner1.setValue(0); 
         calendarAkhir.setDate(new java.util.Date()); 
         jLabel5.setText("Jumlah Hari : ");
         jLabel6.setText("Hari Pertama : ");
